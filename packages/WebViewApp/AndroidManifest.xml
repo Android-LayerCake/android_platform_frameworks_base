@@ -1,0 +1,24 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:androidprv="http://schemas.android.com/apk/prv/res/android"
+        package="com.android.webviewapp"
+        coreApp="true">
+
+    <!-- Added by Franzi for SecureWebView -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:persistent="true"
+        android:allowClearUserData="false"
+        android:allowBackup="false"
+        android:hardwareAccelerated="true"
+        android:label="@string/app_label"
+        android:icon="@*android:drawable/platlogo">
+
+	<!-- started from any app that wants to embed SecureWebView (added by Franzi) -->
+        <activity android:name=".SecureWebView"
+                android:exported="true"
+                android:theme="@android:style/Theme.Translucent.NoTitleBar">
+        </activity>
+
+    </application>
+</manifest>
