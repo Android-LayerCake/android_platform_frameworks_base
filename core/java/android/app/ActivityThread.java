@@ -3408,6 +3408,11 @@ public final class ActivityThread {
 
     private void handleStopActivity(IBinder token, boolean show, int configChanges) {
         ActivityClientRecord r = mActivities.get(token);
+
+	// Added by Franzi to prevent crash of SystemUI when LocationAcg is
+	// embedded and parent activity is stopped. Not sure why this happens...
+	if (r == null) return;
+
         r.activity.mConfigChangeFlags |= configChanges;
 
         StopInfo info = new StopInfo();

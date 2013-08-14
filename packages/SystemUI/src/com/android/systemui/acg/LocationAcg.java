@@ -70,7 +70,8 @@ public class LocationAcg extends Activity implements LocationListener {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		locationManager.requestLocationUpdates(bestProvider, 20000, 1, this);
+		findBestProviderAndRegister();
+		//locationManager.requestLocationUpdates(bestProvider, 0, 0, this);
 	}
 
 	/** Stop the updates when Activity is paused */
@@ -84,6 +85,8 @@ public class LocationAcg extends Activity implements LocationListener {
 	public void onLocationChanged(Location location) {
 		// Don't need to do anything, querying lastKnownLocation on button click
 		// (but need a listener for lastKnownLocation to be valid)
+		if (location != null)
+			Log.i(TAG, "Location changed!");
 	}
 
 	@Override
@@ -109,7 +112,9 @@ public class LocationAcg extends Activity implements LocationListener {
 		bestProvider = locationManager.getBestProvider(new Criteria(), false);
 		
 		// (Re)register
-		locationManager.requestLocationUpdates(bestProvider, 20000, 1, this);
+		locationManager.requestLocationUpdates(bestProvider, 0, 0, this);
+
+		Log.i(TAG, "Registered for location updates from " + bestProvider);
 	}	
 
 }
